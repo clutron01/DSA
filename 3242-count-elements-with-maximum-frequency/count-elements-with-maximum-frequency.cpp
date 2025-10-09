@@ -1,22 +1,23 @@
 class Solution {
 public:
     int maxFrequencyElements(vector<int>& nums) {
-        int freq[101] = {0};
-        int maxFreq = 0;
-        for (int num : nums) {
-            freq[num]++;
-            if (freq[num] > maxFreq) {
-                maxFreq = freq[num];
-            }
-        }
+        vector <int> digits(101,0);
 
-        int total = 0;
-        for (int i = 1; i <= 100; ++i) {
-            if (freq[i] == maxFreq) {
-                total += freq[i];
-            }
-        }
+        int num = 0;
 
-        return total;
+        for(int i=0; i<nums.size(); i++){
+             num = nums[i];
+            digits[num]++;
+        }
+        int maxFreq = INT_MIN;
+        for(int i=0; i<digits.size(); i++){
+            maxFreq = max(maxFreq, digits[i]);
+        }
+        int count = 0;
+        for(int i=0; i<digits.size(); i++){
+            if(digits[i] == maxFreq) 
+            count++;
+        }
+        return count * maxFreq;
     }
 };
